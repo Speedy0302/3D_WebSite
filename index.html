@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>BabylonJS Viewer - Basic usage</title>
-		<script src="https://skfb.ly/puRIt"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketchfab Viewer - Model Switch</title>
+    <style>
+        .viewerContainer {
+            width: 400px;
+            height: 500px;
+            background: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-	<babylon model="./models/alice.glb"></babylon>
-</body>
 
+    <select onchange="loadModel(this.value)">
+        <option value="">Select model</option>
+        <option value="05933a43af7c40d2836bfcf968b02734">Fancer</option>
+        <option value="7394f098116f4734b8f7a684af862b39">R.E.P.O. BOT</option>
+    </select>
+
+    <div class="viewerContainer">
+        <iframe id="sketchfabViewer" allowfullscreen
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share>
+        </iframe>
+    </div>
+
+    <script>
+        function loadModel(uid) {
+            if (!uid) return;
+
+            const iframe = document.getElementById('sketchfabViewer');
+            iframe.src = `https://sketchfab.com/models/${uid}/embed`;
+        }
+    </script>
+
+</body>
 </html>
